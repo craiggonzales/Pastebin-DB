@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if allsearch %}
+
+<h1>View all pastes</h1>
+<table width =50% >
+	<tr align=left>
+		<th>Search Term</th>
+		<th>Number of Pastes</th>
+		<th>Delete?</th>
+	</tr>
+
+{% for x in viewall.items() %}
+	<tr>
+		<td><a href="{{url_for('listsearch', listsearch=x[0])}}">{{x[0]}}</a></td>
+		<td>{{x[1]}}</td>
+		<td><a href="{{url_for('deleteterm', searchterm=x[0])}}">Delete?</a></td>
+	</tr>
+{% endfor %}
+
+{% elif listsearch %}
+<h1>View all pastes for searchterm</h1>
+<table width =50% >
+	<tr align=left>
+		<th>Pastebin ID</th>
+		<th>First 140 Characters</th>
+		<th>Delete?</th>
+	</tr>
+
+{% for x in viewall %}
+	<tr>
+		<td><a href="{{url_for('listpaste', listsearch=x['pastebinID'])}}">{{x['pastebinID']}}</a></td>
+		<td>{{x['data'][0:15]}}</td>
+		<td><a href="{{url_for('deletepaste', listsearch=x['searchterm'], searchterm=x['pastebinID'])}}">Delete?</a></td>
+	</tr>
+{% endfor %}
+
+{% elif pastesearch %}
+
+{% for x in viewall %}
+<h1>View all pastes for {{x['pastebinID']}} </h1>
+
+<p>{{x['data'][:1500]}}</p>
+<p>{{x['data'][1500:3000]}}</p>
+<p>{{x['data'][3000:4500]}}</p>
+<p>{{x['data'][4500:]}}</p>
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

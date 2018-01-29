@@ -1,0 +1,15 @@
+<html>
+	<head>
+	{% if title %}
+	<title> {{ title }} -- count_zero</title>
+	{% else %}
+	<title> Pastebin Search by count_zero </title>
+	{% endif %}
+	</head>
+
+	<body>
+		<div>Pastebin Search: <a href="/index"> Seach </a>   |   <a href="/viewall">View All</a>   |   <a href="/about">About</a></div>
+	<hr>
+	{% block content %}{% endblock %}
+	</body>
+</html>
